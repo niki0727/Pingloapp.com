@@ -119,12 +119,43 @@
       box-shadow: var(--shadow);
     }
 
-    video {
+    .video-placeholder {
+      display: grid;
+      place-items: center;
+      min-height: 360px;
+      padding: 34px;
+      background:
+        radial-gradient(circle at 35% 20%, rgba(241, 37, 73, 0.16), transparent 32%),
+        linear-gradient(145deg, #151518 0%, #25252a 100%);
+      color: #fff;
+      text-align: center;
+    }
+
+    .play {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      color: var(--red);
+      font-size: 24px;
+      box-shadow: 0 18px 38px rgba(0,0,0,0.22);
+    }
+
+    .video-placeholder strong {
       display: block;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #111114;
-      object-fit: cover;
+      font-size: clamp(24px, 4vw, 38px);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .video-placeholder p {
+      margin: 12px auto 0;
+      max-width: 430px;
+      color: rgba(255,255,255,0.68);
+      font-size: 16px;
     }
 
     .video-caption {
@@ -256,6 +287,7 @@
       .nav-inner { min-height: 68px; }
       .brand img { height: 23px; }
       main { padding: 56px 0 44px; }
+      .video-placeholder { min-height: 280px; }
       .video-caption { flex-direction: column; gap: 6px; }
       .moment { gap: 14px; }
       .moment-card { padding: 18px; }
@@ -277,14 +309,17 @@
       <p class="intro">Pinglo started as a simple idea: make lost and found feel less chaotic, less awkward, and more trustworthy. This page is a small growth log of how the app is taking shape.</p>
     </section>
 
-    <section class="video-card" aria-label="Pinglo early prototype video">
-      <video controls preload="metadata" playsinline poster="/assets/appicon.png">
-        <source src="/assets/pinglo-prototype-history.m4v" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+    <section class="video-card" aria-label="Pinglo early prototype diary">
+      <div class="video-placeholder">
+        <div>
+          <span class="play">▶</span>
+          <strong>Prototype diary</strong>
+          <p>A short founder recording is being prepared for the public timeline.</p>
+        </div>
+      </div>
       <div class="video-caption">
         <span>Early prototype diary</span>
-        <span>Trimmed from the original founder recording.</span>
+        <span>Original recording archived locally.</span>
       </div>
     </section>
 
