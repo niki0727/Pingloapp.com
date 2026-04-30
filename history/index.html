@@ -110,62 +110,56 @@
       letter-spacing: -0.012em;
     }
 
-    .video-card {
-      overflow: hidden;
+    .story-card {
       margin: 34px 0 42px;
+      padding: clamp(26px, 5vw, 42px);
       border-radius: var(--radius-xl);
       border: 1px solid var(--stroke);
       background: var(--surface);
       box-shadow: var(--shadow);
     }
 
-    .video-placeholder {
-      display: grid;
-      place-items: center;
-      min-height: 360px;
-      padding: 34px;
-      background:
-        radial-gradient(circle at 35% 20%, rgba(241, 37, 73, 0.16), transparent 32%),
-        linear-gradient(145deg, #151518 0%, #25252a 100%);
-      color: #fff;
-      text-align: center;
-    }
-
-    .play {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 18px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: #fff;
-      color: var(--red);
-      font-size: 24px;
-      box-shadow: 0 18px 38px rgba(0,0,0,0.22);
-    }
-
-    .video-placeholder strong {
-      display: block;
-      font-size: clamp(24px, 4vw, 38px);
+    .story-card h2 {
+      margin: 0;
+      max-width: 720px;
+      font-size: clamp(30px, 4vw, 48px);
       line-height: 1.05;
       letter-spacing: -0.045em;
     }
 
-    .video-placeholder p {
-      margin: 12px auto 0;
-      max-width: 430px;
-      color: rgba(255,255,255,0.68);
-      font-size: 16px;
+    .story-card p {
+      margin: 18px 0 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 18px;
     }
 
-    .video-caption {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 18px 20px;
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .value {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--stroke);
+      background: var(--surface-soft);
+    }
+
+    .value strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .value span {
+      display: block;
       color: var(--muted);
-      font-size: 14px;
-      border-top: 1px solid var(--stroke);
+      font-size: 15px;
+      line-height: 1.45;
     }
 
     .section-title {
@@ -287,8 +281,7 @@
       .nav-inner { min-height: 68px; }
       .brand img { height: 23px; }
       main { padding: 56px 0 44px; }
-      .video-placeholder { min-height: 280px; }
-      .video-caption { flex-direction: column; gap: 6px; }
+      .values { grid-template-columns: 1fr; }
       .moment { gap: 14px; }
       .moment-card { padding: 18px; }
     }
@@ -306,20 +299,27 @@
     <section class="hero">
       <div class="eyebrow">Founder history</div>
       <h1>The early story of Pinglo.</h1>
-      <p class="intro">Pinglo started as a simple idea: make lost and found feel less chaotic, less awkward, and more trustworthy. This page is a small growth log of how the app is taking shape.</p>
+      <p class="intro">Pinglo started from a simple observation: losing something is not just inconvenient. It breaks your rhythm, creates stress, and often leaves people depending on luck. The brand is being built around a calmer way back.</p>
     </section>
 
-    <section class="video-card" aria-label="Pinglo early prototype diary">
-      <div class="video-placeholder">
-        <div>
-          <span class="play">▶</span>
-          <strong>Prototype diary</strong>
-          <p>A short founder recording is being prepared for the public timeline.</p>
+    <section class="story-card" aria-label="Pinglo founder story">
+      <h2>Built from the belief that everyday things deserve a better chance of coming back.</h2>
+      <p>Pinglo is shaped by the small, familiar moments people know too well: a phone left behind, keys misplaced, a bag forgotten, a document that suddenly matters. The idea is not to make lost and found complicated. It is to make it feel more organised, respectful, and human.</p>
+      <p>From the beginning, the focus has been on trust. A useful lost-and-found product has to protect people while still helping them connect. That balance is the heart of Pinglo: clear reports, thoughtful privacy, safer handoffs, and a product experience that feels simple enough for anyone to use.</p>
+
+      <div class="values">
+        <div class="value">
+          <strong>Calm</strong>
+          <span>The experience should reduce panic, not add more noise.</span>
         </div>
-      </div>
-      <div class="video-caption">
-        <span>Early prototype diary</span>
-        <span>Original recording archived locally.</span>
+        <div class="value">
+          <strong>Trust</strong>
+          <span>People need confidence before they share details or meet.</span>
+        </div>
+        <div class="value">
+          <strong>Community</strong>
+          <span>Pinglo is designed for people who want to help things get back.</span>
+        </div>
       </div>
     </section>
 
@@ -329,41 +329,41 @@
         <li class="moment">
           <span class="dot">01</span>
           <div class="moment-card">
-            <div class="date">Idea</div>
-            <h3>A simpler return experience</h3>
-            <p>The first direction was clear: people need a calmer way to report missing things and reconnect without oversharing.</p>
+            <div class="date">Origin</div>
+            <h3>The problem felt too ordinary to ignore</h3>
+            <p>Lost items happen every day, but the process of getting them back is still scattered. Pinglo began with the aim of making that moment feel less random.</p>
           </div>
         </li>
         <li class="moment">
           <span class="dot">02</span>
           <div class="moment-card">
-            <div class="date">Prototype</div>
-            <h3>Turning the flow into an app</h3>
-            <p>The early builds focused on clean reporting, readable feeds, and a safer path from discovery to conversation.</p>
+            <div class="date">Foundation</div>
+            <h3>A product built around trust</h3>
+            <p>The early design focused on a simple public experience supported by private, safer steps when people need to connect.</p>
           </div>
         </li>
         <li class="moment">
           <span class="dot">03</span>
           <div class="moment-card">
             <div class="date">Now</div>
-            <h3>Preparing for real users</h3>
-            <p>Pinglo is being refined for trust, privacy, and a smooth first version that feels useful from day one.</p>
+            <h3>Refining the first public version</h3>
+            <p>Pinglo is being prepared as a focused MVP: light, clear, privacy-aware, and useful enough for real communities to test.</p>
           </div>
         </li>
         <li class="moment">
           <span class="dot">04</span>
           <div class="moment-card">
             <div class="date">Next</div>
-            <h3>Learning from the community</h3>
-            <p>The timeline will keep growing as Pinglo reaches testers, gathers feedback, and improves through real returns.</p>
+            <h3>Growing through real returns</h3>
+            <p>The next chapter is learning from testers, improving the return experience, and building trust one successful handoff at a time.</p>
           </div>
         </li>
       </ol>
     </section>
 
     <section class="note">
-      <strong>Why this page exists</strong>
-      <p>Pinglo is still young. Keeping a public history makes the product more human without giving away every detail too early.</p>
+      <strong>A living brand history</strong>
+      <p>This page will grow as Pinglo grows: from early idea, to first testers, to real returns, partnerships, and community stories.</p>
     </section>
 
     <footer>
