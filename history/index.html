@@ -1,64 +1,344 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Pinglo History</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pinglo — History</title>
+  <meta name="description" content="The early story of Pinglo, a lost and found app by ASK FOR TASK LTD." />
   <style>
-    :root{--bg:#f7f7f8;--surface:#fff;--text:#131316;--muted:#5a5a61;--stroke:#e7e7ec;--red:#f12549;--radius:20px;--shadow:0 12px 36px rgba(12,12,18,.07)}
-    *{box-sizing:border-box} body{margin:0;font-family:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(circle at 10% -20%,#fff 0%,#f9f9fa 55%,#f3f3f5 100%);color:var(--text);line-height:1.6}
-    .container{width:min(980px,92vw);margin:0 auto}
-    .nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);background:rgba(247,247,248,.88);border-bottom:1px solid rgba(231,231,236,.75)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;min-height:72px}
-    .brand img{height:24px;width:auto}
-    .nav a{color:var(--muted);text-decoration:none;font-weight:700;font-size:14px}
-    .nav a:hover{color:var(--text)}
-    main{padding:38px 0 56px}
-    .card{background:var(--surface);border:1px solid var(--stroke);border-radius:calc(var(--radius) + 6px);box-shadow:var(--shadow);padding:30px}
-    h1{margin:0 0 6px;font-size:clamp(30px,4vw,44px);line-height:1.08;letter-spacing:-.02em}
-    .muted{color:var(--muted);font-size:14px}
-    .timeline{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:14px}
-    .timeline li{padding:14px 14px 14px 16px;border:1px solid var(--stroke);border-radius:14px;background:#fff;position:relative}
-    .timeline li::before{content:"";position:absolute;left:-1px;top:-1px;bottom:-1px;width:4px;background:var(--red);border-radius:14px 0 0 14px}
-    .timeline h3{margin:0;font-size:17px}
-    .timeline p{margin:6px 0 0;color:#2a2a30;font-size:15px}
-    .footer{margin-top:20px;padding-top:16px;border-top:1px solid var(--stroke);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:14px}
-    a{color:var(--red)}
+    :root {
+      --background: #fbfbfc;
+      --surface: #ffffff;
+      --surface-soft: #f5f5f6;
+      --text: #111114;
+      --muted: #66666d;
+      --quiet: #8c8c94;
+      --stroke: #e8e8ec;
+      --red: #f12549;
+      --shadow: 0 18px 50px rgba(16, 16, 20, 0.07);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --max: 980px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 50% -10%, #ffffff 0%, #fbfbfc 42%, #f3f3f5 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    .container { width: min(var(--max), calc(100vw - 44px)); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(251, 251, 252, 0.86);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(232, 232, 236, 0.72);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand { display: inline-flex; align-items: center; text-decoration: none; }
+    .brand img { height: 25px; width: auto; display: block; }
+
+    .back {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .back:hover { color: var(--text); }
+
+    main { padding: 82px 0 62px; }
+
+    .hero {
+      max-width: 790px;
+      margin-bottom: 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      color: var(--quiet);
+      font-size: 13px;
+      font-weight: 760;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 6px rgba(241, 37, 73, 0.09);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(44px, 7vw, 76px);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      font-weight: 830;
+    }
+
+    .intro {
+      margin: 24px 0 0;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.52;
+      letter-spacing: -0.012em;
+    }
+
+    .video-card {
+      overflow: hidden;
+      margin: 34px 0 42px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--stroke);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111114;
+      object-fit: cover;
+    }
+
+    .video-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--stroke);
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      font-weight: 820;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 17px;
+      top: 22px;
+      bottom: 22px;
+      width: 1px;
+      background: var(--stroke);
+    }
+
+    .moment {
+      position: relative;
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .dot {
+      position: relative;
+      z-index: 1;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--stroke);
+      background: var(--surface);
+      display: grid;
+      place-items: center;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 820;
+      box-shadow: 0 8px 18px rgba(16,16,20,0.05);
+    }
+
+    .moment-card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--stroke);
+      background: var(--surface);
+      box-shadow: 0 12px 30px rgba(20, 20, 24, 0.045);
+    }
+
+    .date {
+      color: var(--quiet);
+      font-size: 13px;
+      font-weight: 760;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .moment h3 {
+      margin: 8px 0 0;
+      font-size: 22px;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+    }
+
+    .moment p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .note {
+      margin-top: 34px;
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--stroke);
+      background: var(--surface-soft);
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .note p { margin: 0; color: var(--muted); }
+
+    footer {
+      margin-top: 54px;
+      padding-top: 24px;
+      border-top: 1px solid var(--stroke);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .links { display: inline-flex; gap: 18px; flex-wrap: wrap; }
+    .links a { color: var(--text); text-decoration: none; font-weight: 700; }
+    .links a:hover { color: var(--red); }
+
+    @media (max-width: 680px) {
+      .container { width: min(100vw - 30px, var(--max)); }
+      .nav-inner { min-height: 68px; }
+      .brand img { height: 23px; }
+      main { padding: 56px 0 44px; }
+      .video-caption { flex-direction: column; gap: 6px; }
+      .moment { gap: 14px; }
+      .moment-card { padding: 18px; }
+    }
   </style>
 </head>
 <body>
   <header class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="/"><img src="/assets/logo.png" alt="Pinglo"></a>
-      <a href="/">Back to home</a>
+      <a class="brand" href="/" aria-label="Pinglo home"><img src="/assets/logo.png" alt="Pinglo" /></a>
+      <a class="back" href="/">Back to home</a>
     </div>
   </header>
 
   <main class="container">
-    <article class="card">
-      <h1>Pinglo History</h1>
-      <p class="muted">How Pinglo evolved into a safety-first lost-and-found platform.</p>
+    <section class="hero">
+      <div class="eyebrow">Founder history</div>
+      <h1>The early story of Pinglo.</h1>
+      <p class="intro">Pinglo started as a simple idea: make lost and found feel less chaotic, less awkward, and more trustworthy. This page is a small growth log of how the app is taking shape.</p>
+    </section>
 
-      <ul class="timeline">
-        <li>
-          <h3>Phase 1: Core reporting</h3>
-          <p>Started with fast lost/found posting and category-based feed browsing for local communities.</p>
-        </li>
-        <li>
-          <h3>Phase 2: Verification before chat</h3>
-          <p>Added claim verification flow to reduce scams and prevent unsafe sharing too early.</p>
-        </li>
-        <li>
-          <h3>Phase 3: Private proof + safe return</h3>
-          <p>Introduced private proof-photo workflow, return confirmation, and moderation controls (report/block).</p>
-        </li>
-      </ul>
-
-      <div class="footer">
-        <span>Pinglo is operated by ASK FOR TASK LTD.</span>
-        <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/safety">Safety</a></span>
+    <section class="video-card" aria-label="Pinglo early prototype video">
+      <video controls preload="metadata" playsinline poster="/assets/appicon.png">
+        <source src="/assets/pinglo-prototype-history.m4v" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-caption">
+        <span>Early prototype diary</span>
+        <span>Trimmed from the original founder recording.</span>
       </div>
-    </article>
+    </section>
+
+    <section aria-labelledby="timeline-title">
+      <h2 class="section-title" id="timeline-title">Growth timeline</h2>
+      <ol class="timeline">
+        <li class="moment">
+          <span class="dot">01</span>
+          <div class="moment-card">
+            <div class="date">Idea</div>
+            <h3>A simpler return experience</h3>
+            <p>The first direction was clear: people need a calmer way to report missing things and reconnect without oversharing.</p>
+          </div>
+        </li>
+        <li class="moment">
+          <span class="dot">02</span>
+          <div class="moment-card">
+            <div class="date">Prototype</div>
+            <h3>Turning the flow into an app</h3>
+            <p>The early builds focused on clean reporting, readable feeds, and a safer path from discovery to conversation.</p>
+          </div>
+        </li>
+        <li class="moment">
+          <span class="dot">03</span>
+          <div class="moment-card">
+            <div class="date">Now</div>
+            <h3>Preparing for real users</h3>
+            <p>Pinglo is being refined for trust, privacy, and a smooth first version that feels useful from day one.</p>
+          </div>
+        </li>
+        <li class="moment">
+          <span class="dot">04</span>
+          <div class="moment-card">
+            <div class="date">Next</div>
+            <h3>Learning from the community</h3>
+            <p>The timeline will keep growing as Pinglo reaches testers, gathers feedback, and improves through real returns.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="note">
+      <strong>Why this page exists</strong>
+      <p>Pinglo is still young. Keeping a public history makes the product more human without giving away every detail too early.</p>
+    </section>
+
+    <footer>
+      <span>Pinglo is operated by <strong>ASK FOR TASK LTD</strong>.</span>
+      <nav class="links" aria-label="Legal links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/safety">Safety</a>
+      </nav>
+    </footer>
   </main>
 </body>
 </html>
