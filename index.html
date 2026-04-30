@@ -3,205 +3,417 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pinglo — Lost & Found, Verified Returns</title>
-  <meta name="description" content="Pinglo helps people return lost items with safe verification, private proof photos, and return confirmation." />
+  <title>Pinglo — Lost & Found Made Simple</title>
+  <meta name="description" content="Pinglo is a simple lost and found app for reporting items, connecting safely, and helping things get back to the right people." />
   <style>
     :root {
-      --bg: #f7f7f8;
+      --background: #fbfbfc;
       --surface: #ffffff;
-      --text: #131316;
-      --muted: #5a5a61;
-      --stroke: #e7e7ec;
+      --surface-soft: #f5f5f6;
+      --text: #111114;
+      --muted: #66666d;
+      --quiet: #8c8c94;
+      --stroke: #e8e8ec;
       --red: #f12549;
-      --green: #1d9b56;
-      --shadow: 0 12px 36px rgba(12, 12, 18, 0.07);
-      --radius: 20px;
+      --green: #178f50;
+      --shadow: 0 18px 50px rgba(16, 16, 20, 0.07);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1120px;
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     html, body { margin: 0; padding: 0; }
     body {
-      font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at 10% -20%, #fff 0%, #f9f9fa 55%, #f3f3f5 100%);
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 50% -10%, #ffffff 0%, #fbfbfc 42%, #f3f3f5 100%);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
 
-    .container { width: min(1120px, 92vw); margin: 0 auto; }
+    a { color: inherit; }
+    .container { width: min(var(--max), calc(100vw - 44px)); margin: 0 auto; }
 
     .nav {
-      position: sticky; top: 0; z-index: 20;
-      backdrop-filter: blur(10px);
-      background: rgba(247, 247, 248, 0.88);
-      border-bottom: 1px solid rgba(231, 231, 236, 0.75);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(251, 251, 252, 0.86);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(232, 232, 236, 0.72);
     }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      min-height: 72px;
-    }
-    .brand {
-      display: inline-flex; align-items: center; gap: 12px;
-      text-decoration: none; color: var(--text); font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-    .brand img { height: 24px; width: auto; }
 
-    .nav-links { display: inline-flex; gap: 22px; align-items: center; }
-    .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600;
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
     }
+
+    .brand { display: inline-flex; align-items: center; text-decoration: none; }
+    .brand img { display: block; height: 25px; width: auto; }
+
+    .nav-links {
+      display: inline-flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .nav-links a { text-decoration: none; }
     .nav-links a:hover { color: var(--text); }
 
-    .cta {
-      border: 0; background: var(--red); color: #fff; text-decoration: none;
-      padding: 10px 16px; border-radius: 999px; font-weight: 700; font-size: 14px;
-      box-shadow: 0 8px 18px rgba(241, 37, 73, 0.32);
+    .top-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 17px;
+      border-radius: 999px;
+      background: var(--text);
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 720;
     }
 
-    .hero { padding: 64px 0 38px; }
+    .hero { padding: 90px 0 58px; }
+
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 28px;
-      align-items: stretch;
+      grid-template-columns: minmax(0, 1fr) 430px;
+      align-items: center;
+      gap: 58px;
     }
-    .hero-card {
-      background: var(--surface);
-      border: 1px solid var(--stroke);
-      border-radius: calc(var(--radius) + 6px);
-      box-shadow: var(--shadow);
-      padding: 36px;
-      position: relative;
-      overflow: hidden;
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      color: var(--quiet);
+      font-size: 13px;
+      font-weight: 720;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-      background: #fff5f8; color: #cb2747; border: 1px solid #ffd7e1;
-      border-radius: 999px; padding: 8px 12px;
-      margin-bottom: 18px;
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 6px rgba(241, 37, 73, 0.09);
     }
+
     h1 {
       margin: 0;
-      font-size: clamp(34px, 5vw, 58px);
-      line-height: 1.03;
-      letter-spacing: -0.03em;
+      max-width: 760px;
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 0.96;
+      letter-spacing: -0.065em;
+      font-weight: 820;
     }
-    .hero p {
-      margin: 16px 0 0;
+
+    .hero-copy {
+      max-width: 590px;
+      margin: 26px 0 0;
       color: var(--muted);
-      font-size: clamp(16px, 2vw, 20px);
-      line-height: 1.48;
-      max-width: 66ch;
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.52;
+      letter-spacing: -0.012em;
     }
-    .hero-actions { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-height: 46px; padding: 0 18px; border-radius: 999px;
-      text-decoration: none; font-weight: 700; font-size: 14px;
-    }
-    .btn-red { background: var(--red); color: #fff; }
-    .btn-ghost { background: #fff; color: var(--text); border: 1px solid var(--stroke); }
 
-    .hero-visual {
-      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 760;
+    }
+
+    .button-primary {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(241, 37, 73, 0.24);
+    }
+
+    .button-secondary {
+      background: var(--surface);
+      color: var(--text);
       border: 1px solid var(--stroke);
-      border-radius: calc(var(--radius) + 6px);
+    }
+
+    .availability {
+      margin-top: 18px;
+      color: var(--quiet);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .phone-card {
+      position: relative;
+      padding: 18px;
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, #fff 0%, #f8f8f9 100%);
       box-shadow: var(--shadow);
-      padding: 20px;
-      display: grid;
+      overflow: hidden;
+    }
+
+    .phone-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(241, 37, 73, 0.08);
+      pointer-events: none;
+    }
+
+    .app-strip {
+      position: relative;
+      display: flex;
+      align-items: center;
       gap: 14px;
-      align-content: start;
-    }
-    .hero-row { display: grid; grid-template-columns: 62px 1fr; gap: 12px; align-items: center; }
-    .hero-row img.icon {
-      width: 62px; height: 62px; border-radius: 16px; border: 1px solid var(--stroke);
-      background: #fff; object-fit: cover;
-    }
-    .hero-row .kicker { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-    .hero-row .title { margin-top: 4px; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
-
-    .hero-shots { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 6px; }
-    .hero-shots img {
-      width: 100%; border-radius: 16px; border: 1px solid var(--stroke);
-      object-fit: cover; aspect-ratio: 16 / 9;
-      background: #fff;
+      margin-bottom: 14px;
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--stroke);
     }
 
-    .section { padding: 28px 0; }
-    .section h2 {
-      margin: 0 0 14px;
-      font-size: clamp(27px, 3vw, 38px);
-      line-height: 1.1;
+    .app-strip img {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      border: 1px solid var(--stroke);
+    }
+
+    .app-strip strong {
+      display: block;
+      font-size: 18px;
       letter-spacing: -0.02em;
     }
-    .section p.lead { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.5; }
 
-    .grid-3 {
+    .app-strip span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .preview-stack {
+      position: relative;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 18px;
+      gap: 12px;
     }
-    .feature {
-      background: var(--surface);
+
+    .preview-stack img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 22px;
       border: 1px solid var(--stroke);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: 0 8px 22px rgba(9, 9, 13, 0.04);
-    }
-    .feature .tag {
-      display: inline-block; margin-bottom: 10px; font-size: 12px; font-weight: 700;
-      padding: 6px 10px; border-radius: 999px; border: 1px solid var(--stroke); color: var(--muted);
       background: #fff;
     }
-    .feature h3 { margin: 0; font-size: 19px; letter-spacing: -0.01em; }
-    .feature p { margin: 9px 0 0; color: var(--muted); font-size: 15px; line-height: 1.48; }
 
-    .trust {
-      margin-top: 20px;
-      background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
-      border: 1px solid var(--stroke);
-      border-radius: calc(var(--radius) + 4px);
-      padding: 22px;
+    .section { padding: 54px 0; }
+
+    .section-header {
+      max-width: 680px;
+      margin-bottom: 24px;
+    }
+
+    .section-kicker {
+      margin-bottom: 12px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 760;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+      font-weight: 810;
+    }
+
+    .lead {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.55;
+    }
+
+    .cards {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
-      align-items: center;
     }
-    .ticks { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-    .ticks li {
-      padding: 10px 12px; border: 1px solid var(--stroke); border-radius: 12px; background: #fff;
-      font-weight: 600; color: #24242a;
-    }
-    .ticks li b { color: var(--green); }
 
-    .legal {
-      margin: 36px 0 56px;
-      padding: 20px;
+    .card {
+      min-height: 210px;
+      padding: 24px;
+      border-radius: var(--radius-lg);
       border: 1px solid var(--stroke);
-      border-radius: var(--radius);
       background: var(--surface);
-      display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between;
+      box-shadow: 0 12px 30px rgba(20, 20, 24, 0.045);
     }
-    .legal .left { color: var(--muted); font-size: 14px; }
-    .legal .links { display: inline-flex; gap: 14px; flex-wrap: wrap; }
-    .legal .links a { color: var(--text); text-decoration: none; font-weight: 700; }
-    .legal .links a:hover { color: var(--red); }
+
+    .card .number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 34px;
+      border-radius: 50%;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 780;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+    }
+
+    .card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.52;
+    }
+
+    .quiet-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      padding: 24px;
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .note {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-soft);
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 21px;
+      letter-spacing: -0.02em;
+    }
+
+    .note p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .final-cta {
+      margin: 54px 0 70px;
+      padding: 38px;
+      border-radius: var(--radius-xl);
+      background: #111114;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .final-cta h2 { color: #fff; font-size: clamp(30px, 4vw, 48px); }
+    .final-cta p { margin: 12px 0 0; color: rgba(255,255,255,0.68); font-size: 17px; line-height: 1.5; }
+    .final-cta .button { background: #fff; color: var(--text); flex: 0 0 auto; }
+
+    footer {
+      padding: 28px 0 46px;
+      border-top: 1px solid var(--stroke);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: inline-flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text);
+      font-weight: 680;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--red); }
 
     @media (max-width: 980px) {
-      .hero-grid, .trust { grid-template-columns: 1fr; }
-      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .hero-grid { grid-template-columns: 1fr; gap: 34px; }
+      .phone-card { max-width: 520px; }
+      .cards, .quiet-panel { grid-template-columns: 1fr; }
+      .final-cta { align-items: flex-start; flex-direction: column; }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 680px) {
+      .container { width: min(100vw - 30px, var(--max)); }
+      .nav-inner { min-height: 68px; }
       .nav-links { display: none; }
-      .hero { padding-top: 36px; }
-      .hero-card { padding: 24px; }
-      .grid-3 { grid-template-columns: 1fr; }
-      .legal { margin-bottom: 36px; }
-      .btn, .cta { min-height: 44px; }
+      .brand img { height: 23px; }
+      .hero { padding: 58px 0 38px; }
+      h1 { font-size: clamp(44px, 14vw, 62px); }
+      .hero-copy { font-size: 18px; }
+      .phone-card { padding: 12px; border-radius: 26px; }
+      .section { padding: 40px 0; }
+      .card { min-height: auto; }
+      .card .number { margin-bottom: 24px; }
+      .final-cta { margin: 40px 0 54px; padding: 28px; }
+      .button, .top-action { width: 100%; }
+      .hero-actions { align-items: stretch; }
     }
   </style>
 </head>
@@ -211,103 +423,108 @@
       <a class="brand" href="/" aria-label="Pinglo home">
         <img src="/assets/logo.png" alt="Pinglo" />
       </a>
-      <nav class="nav-links" aria-label="Main">
-        <a href="#features">Features</a>
-        <a href="#safety">Safety</a>
-        <a href="/history">History</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#how">How it feels</a>
+        <a href="#trust">Trust</a>
+        <a href="/history">Story</a>
+        <a href="/safety">Safety</a>
       </nav>
-      <a class="cta" href="#download">Get Pinglo</a>
+      <a class="top-action" href="#try">Join waitlist</a>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero" id="download">
-      <div class="hero-grid">
-        <article class="hero-card">
-          <span class="pill">Trusted Returns</span>
-          <h1>Lost something? Find it safer, faster, and with proof.</h1>
-          <p>Pinglo helps people report lost or found items, verify ownership before sharing private details, and confirm returns with clear trust signals.</p>
+  <main>
+    <section class="hero" id="try">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Pinglo</div>
+          <h1>Find what’s missing.</h1>
+          <p class="hero-copy">A calm, modern place to report lost and found items, connect with the right person, and bring everyday things back home.</p>
           <div class="hero-actions">
-            <a class="btn btn-red" href="https://pingloapp.com/safety">How safety works</a>
-            <a class="btn btn-ghost" href="https://pingloapp.com/privacy">Privacy policy</a>
+            <a class="button button-primary" href="/safety">See safety basics</a>
+            <a class="button button-secondary" href="/privacy">Read privacy</a>
           </div>
-        </article>
+          <p class="availability">Launching soon on iPhone. Built and operated by ASK FOR TASK LTD.</p>
+        </div>
 
-        <aside class="hero-visual" aria-label="Pinglo app highlights">
-          <div class="hero-row">
-            <img class="icon" src="/assets/appicon.png" alt="Pinglo app icon" />
+        <aside class="phone-card" aria-label="Pinglo app preview">
+          <div class="app-strip">
+            <img src="/assets/appicon.png" alt="Pinglo app icon" />
             <div>
-              <div class="kicker">Pinglo</div>
-              <div class="title">Lost & Found with verification-first chat</div>
+              <strong>Lost & found, simplified</strong>
+              <span>Report, match, and return with less noise.</span>
             </div>
           </div>
-          <div class="hero-shots">
-            <img src="/assets/hero_search.png" alt="Search and report flow preview" />
-            <img src="/assets/hero_match.png" alt="Match verification and chat preview" />
-            <img src="/assets/hero_return.png" alt="Return confirmation flow preview" />
+          <div class="preview-stack">
+            <img src="/assets/hero_search.png" alt="Pinglo report and search preview" />
+            <img src="/assets/hero_return.png" alt="Pinglo return confirmation preview" />
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="section" id="features">
-      <h2>Built for real-world returns</h2>
-      <p class="lead">Every step is designed to reduce scams and increase successful handoffs.</p>
-
-      <div class="grid-3">
-        <article class="feature">
-          <span class="tag">Step 1</span>
-          <h3>Report clearly</h3>
-          <p>Post a lost or found report with category, details, and approximate location.</p>
-        </article>
-        <article class="feature">
-          <span class="tag">Step 2</span>
-          <h3>Verify before chat</h3>
-          <p>Ownership checks happen before sensitive details or proof photos are shared.</p>
-        </article>
-        <article class="feature">
-          <span class="tag">Step 3</span>
-          <h3>Confirm return</h3>
-          <p>Both sides confirm the handoff in-app for trusted closure and rewards.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="safety">
-      <h2>Safety-first by default</h2>
-      <p class="lead">Pinglo combines moderation, privacy controls, and retention rules to protect users.</p>
-
-      <div class="trust">
-        <div>
-          <ul class="ticks">
-            <li><b>Public feed has no public photos.</b> Proof photos are private and verification-only.</li>
-            <li><b>Report + block tools</b> are available directly in chat flows.</li>
-            <li><b>Proof photos auto-delete</b> 30 days after return confirmation.</li>
-          </ul>
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Simple by design</div>
+          <h2>Enough structure to help. Enough privacy to feel safe.</h2>
+          <p class="lead">Pinglo keeps the experience focused: post the essentials, find a likely match, and move carefully from there.</p>
         </div>
-        <div>
-          <ul class="ticks">
-            <li>Meet in public places for handoff.</li>
-            <li>Never share bank details or personal IDs.</li>
-            <li>Use in-app confirmation to close every return.</li>
-          </ul>
+
+        <div class="cards">
+          <article class="card">
+            <span class="number">01</span>
+            <h3>Post the essentials</h3>
+            <p>Describe the item clearly without turning the public feed into a privacy risk.</p>
+          </article>
+          <article class="card">
+            <span class="number">02</span>
+            <h3>Connect carefully</h3>
+            <p>Pinglo is built around safer conversations, not random public replies.</p>
+          </article>
+          <article class="card">
+            <span class="number">03</span>
+            <h3>Close the loop</h3>
+            <p>When an item gets back to the right person, the return can be confirmed in-app.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <footer class="legal">
-      <div class="left">
-        Pinglo is operated by <strong>ASK FOR TASK LTD</strong>.
+    <section class="section" id="trust">
+      <div class="container">
+        <div class="quiet-panel">
+          <div class="note">
+            <strong>Privacy first</strong>
+            <p>Public posts are intentionally limited. Sensitive details stay out of the open feed.</p>
+          </div>
+          <div class="note">
+            <strong>Built for handoff safety</strong>
+            <p>Pinglo nudges people toward public meetups, careful messaging, and clear return confirmation.</p>
+          </div>
+        </div>
+
+        <section class="final-cta">
+          <div>
+            <h2>A better way back.</h2>
+            <p>Pinglo is being shaped for communities, campuses, venues, and everyday city life.</p>
+          </div>
+          <a class="button" href="/history">Read the story</a>
+        </section>
       </div>
-      <div class="links">
-        <a href="/history">History</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Use</a>
-        <a href="/safety">Safety Policy</a>
-      </div>
-    </footer>
+    </section>
   </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>Pinglo is operated by <strong>ASK FOR TASK LTD</strong>.</div>
+      <nav class="footer-links" aria-label="Legal links">
+        <a href="/history">History</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/safety">Safety</a>
+      </nav>
+    </div>
+  </footer>
 </body>
 </html>
