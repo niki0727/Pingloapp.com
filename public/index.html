@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pinglo — Lost & Found, Verified Returns</title>
+  <meta name="description" content="Pinglo helps people return lost items with safe verification, private proof photos, and return confirmation." />
+  <style>
+    :root {
+      --bg: #f7f7f8;
+      --surface: #ffffff;
+      --text: #131316;
+      --muted: #5a5a61;
+      --stroke: #e7e7ec;
+      --red: #f12549;
+      --green: #1d9b56;
+      --shadow: 0 12px 36px rgba(12, 12, 18, 0.07);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at 10% -20%, #fff 0%, #f9f9fa 55%, #f3f3f5 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 247, 248, 0.88);
+      border-bottom: 1px solid rgba(231, 231, 236, 0.75);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 72px;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--text); font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .brand img { height: 24px; width: auto; }
+
+    .nav-links { display: inline-flex; gap: 22px; align-items: center; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .cta {
+      border: 0; background: var(--red); color: #fff; text-decoration: none;
+      padding: 10px 16px; border-radius: 999px; font-weight: 700; font-size: 14px;
+      box-shadow: 0 8px 18px rgba(241, 37, 73, 0.32);
+    }
+
+    .hero { padding: 64px 0 38px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow);
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      background: #fff5f8; color: #cb2747; border: 1px solid #ffd7e1;
+      border-radius: 999px; padding: 8px 12px;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+    }
+    .hero p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.48;
+      max-width: 66ch;
+    }
+    .hero-actions { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 46px; padding: 0 18px; border-radius: 999px;
+      text-decoration: none; font-weight: 700; font-size: 14px;
+    }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-ghost { background: #fff; color: var(--text); border: 1px solid var(--stroke); }
+
+    .hero-visual {
+      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      border: 1px solid var(--stroke);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+    .hero-row { display: grid; grid-template-columns: 62px 1fr; gap: 12px; align-items: center; }
+    .hero-row img.icon {
+      width: 62px; height: 62px; border-radius: 16px; border: 1px solid var(--stroke);
+      background: #fff; object-fit: cover;
+    }
+    .hero-row .kicker { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .hero-row .title { margin-top: 4px; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+
+    .hero-shots { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 6px; }
+    .hero-shots img {
+      width: 100%; border-radius: 16px; border: 1px solid var(--stroke);
+      object-fit: cover; aspect-ratio: 16 / 9;
+      background: #fff;
+    }
+
+    .section { padding: 28px 0; }
+    .section h2 {
+      margin: 0 0 14px;
+      font-size: clamp(27px, 3vw, 38px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .section p.lead { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.5; }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 22px rgba(9, 9, 13, 0.04);
+    }
+    .feature .tag {
+      display: inline-block; margin-bottom: 10px; font-size: 12px; font-weight: 700;
+      padding: 6px 10px; border-radius: 999px; border: 1px solid var(--stroke); color: var(--muted);
+      background: #fff;
+    }
+    .feature h3 { margin: 0; font-size: 19px; letter-spacing: -0.01em; }
+    .feature p { margin: 9px 0 0; color: var(--muted); font-size: 15px; line-height: 1.48; }
+
+    .trust {
+      margin-top: 20px;
+      background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+      border: 1px solid var(--stroke);
+      border-radius: calc(var(--radius) + 4px);
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .ticks { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .ticks li {
+      padding: 10px 12px; border: 1px solid var(--stroke); border-radius: 12px; background: #fff;
+      font-weight: 600; color: #24242a;
+    }
+    .ticks li b { color: var(--green); }
+
+    .legal {
+      margin: 36px 0 56px;
+      padding: 20px;
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: var(--surface);
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between;
+    }
+    .legal .left { color: var(--muted); font-size: 14px; }
+    .legal .links { display: inline-flex; gap: 14px; flex-wrap: wrap; }
+    .legal .links a { color: var(--text); text-decoration: none; font-weight: 700; }
+    .legal .links a:hover { color: var(--red); }
+
+    @media (max-width: 980px) {
+      .hero-grid, .trust { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 36px; }
+      .hero-card { padding: 24px; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .legal { margin-bottom: 36px; }
+      .btn, .cta { min-height: 44px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/" aria-label="Pinglo home">
+        <img src="/assets/logo.png" alt="Pinglo" />
+      </a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="#features">Features</a>
+        <a href="#safety">Safety</a>
+        <a href="/history">History</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+      <a class="cta" href="#download">Get Pinglo</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="download">
+      <div class="hero-grid">
+        <article class="hero-card">
+          <span class="pill">Trusted Returns</span>
+          <h1>Lost something? Find it safer, faster, and with proof.</h1>
+          <p>Pinglo helps people report lost or found items, verify ownership before sharing private details, and confirm returns with clear trust signals.</p>
+          <div class="hero-actions">
+            <a class="btn btn-red" href="https://pingloapp.com/safety">How safety works</a>
+            <a class="btn btn-ghost" href="https://pingloapp.com/privacy">Privacy policy</a>
+          </div>
+        </article>
+
+        <aside class="hero-visual" aria-label="Pinglo app highlights">
+          <div class="hero-row">
+            <img class="icon" src="/assets/appicon.png" alt="Pinglo app icon" />
+            <div>
+              <div class="kicker">Pinglo</div>
+              <div class="title">Lost & Found with verification-first chat</div>
+            </div>
+          </div>
+          <div class="hero-shots">
+            <img src="/assets/hero_search.png" alt="Search and report flow preview" />
+            <img src="/assets/hero_match.png" alt="Match verification and chat preview" />
+            <img src="/assets/hero_return.png" alt="Return confirmation flow preview" />
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <h2>Built for real-world returns</h2>
+      <p class="lead">Every step is designed to reduce scams and increase successful handoffs.</p>
+
+      <div class="grid-3">
+        <article class="feature">
+          <span class="tag">Step 1</span>
+          <h3>Report clearly</h3>
+          <p>Post a lost or found report with category, details, and approximate location.</p>
+        </article>
+        <article class="feature">
+          <span class="tag">Step 2</span>
+          <h3>Verify before chat</h3>
+          <p>Ownership checks happen before sensitive details or proof photos are shared.</p>
+        </article>
+        <article class="feature">
+          <span class="tag">Step 3</span>
+          <h3>Confirm return</h3>
+          <p>Both sides confirm the handoff in-app for trusted closure and rewards.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="safety">
+      <h2>Safety-first by default</h2>
+      <p class="lead">Pinglo combines moderation, privacy controls, and retention rules to protect users.</p>
+
+      <div class="trust">
+        <div>
+          <ul class="ticks">
+            <li><b>Public feed has no public photos.</b> Proof photos are private and verification-only.</li>
+            <li><b>Report + block tools</b> are available directly in chat flows.</li>
+            <li><b>Proof photos auto-delete</b> 30 days after return confirmation.</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="ticks">
+            <li>Meet in public places for handoff.</li>
+            <li>Never share bank details or personal IDs.</li>
+            <li>Use in-app confirmation to close every return.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="legal">
+      <div class="left">
+        Pinglo is operated by <strong>ASK FOR TASK LTD</strong>.
+      </div>
+      <div class="links">
+        <a href="/history">History</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+        <a href="/safety">Safety Policy</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
