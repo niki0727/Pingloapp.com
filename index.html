@@ -347,6 +347,119 @@
       line-height: 1.55;
     }
 
+    .waitlist {
+      margin: 54px 0 70px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.7fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .waitlist-copy,
+    .waitlist-form {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--stroke);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .waitlist-copy {
+      padding: clamp(28px, 5vw, 42px);
+    }
+
+    .waitlist-copy p {
+      margin: 16px 0 0;
+      max-width: 540px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .waitlist-form {
+      padding: 24px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      display: block;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 730;
+      letter-spacing: -0.01em;
+    }
+
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 8px;
+      padding: 0 16px;
+      border-radius: 16px;
+      border: 1px solid var(--stroke);
+      background: var(--surface-soft);
+      color: var(--text);
+      font: inherit;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input[type="email"]:focus,
+    input[type="tel"]:focus {
+      border-color: rgba(241, 37, 73, 0.72);
+      box-shadow: 0 0 0 4px rgba(241, 37, 73, 0.10);
+      background: #fff;
+    }
+
+    .choice-note {
+      margin: 12px 0 0;
+      color: var(--quiet);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .consent {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 10px;
+      align-items: start;
+      margin: 18px 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .consent input {
+      width: 18px;
+      height: 18px;
+      margin: 1px 0 0;
+      accent-color: var(--red);
+    }
+
+    .submit-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .submit-row button {
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .form-status {
+      min-height: 20px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
     .final-cta {
       margin: 54px 0 70px;
       padding: 38px;
@@ -395,7 +508,7 @@
     @media (max-width: 980px) {
       .hero-grid { grid-template-columns: 1fr; gap: 34px; }
       .phone-card { max-width: 520px; }
-      .cards, .quiet-panel { grid-template-columns: 1fr; }
+      .cards, .quiet-panel, .waitlist { grid-template-columns: 1fr; }
       .final-cta { align-items: flex-start; flex-direction: column; }
     }
 
@@ -414,6 +527,8 @@
       .final-cta { margin: 40px 0 54px; padding: 28px; }
       .button, .top-action { width: 100%; }
       .hero-actions { align-items: stretch; }
+      .waitlist { margin: 40px 0 54px; }
+      .waitlist-form { padding: 18px; }
     }
   </style>
 </head>
@@ -429,7 +544,7 @@
         <a href="/history">Story</a>
         <a href="/safety">Safety</a>
       </nav>
-      <a class="top-action" href="#try">Join waitlist</a>
+      <a class="top-action" href="#waitlist">Join waitlist</a>
     </div>
   </header>
 
@@ -441,7 +556,7 @@
           <h1>Find what’s missing.</h1>
           <p class="hero-copy">A calm, modern place to report lost and found items, connect with the right person, and bring everyday things back home.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="/safety">See safety basics</a>
+            <a class="button button-primary" href="#waitlist">Join the waitlist</a>
             <a class="button button-secondary" href="/privacy">Read privacy</a>
           </div>
           <p class="availability">Launching soon on iPhone. Built and operated by ASK FOR TASK LTD.</p>
@@ -504,12 +619,35 @@
           </div>
         </div>
 
-        <section class="final-cta">
-          <div>
-            <h2>A better way back.</h2>
-            <p>Pinglo is being shaped for communities, campuses, venues, and everyday city life.</p>
+        <section class="waitlist" id="waitlist" aria-labelledby="waitlist-title">
+          <div class="waitlist-copy">
+            <div class="section-kicker">Early access</div>
+            <h2 id="waitlist-title">Be first to know when Pinglo is ready.</h2>
+            <p>Leave an email or phone number and we’ll let you know when the iPhone app is available to download. No spam, just launch updates.</p>
           </div>
-          <a class="button" href="/history">Read the story</a>
+
+          <form class="waitlist-form" id="waitlist-form">
+            <div class="field-group">
+              <label for="waitlist-email">
+                Email
+                <input id="waitlist-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+              </label>
+              <label for="waitlist-phone">
+                Phone
+                <input id="waitlist-phone" name="phone" type="tel" autocomplete="tel" placeholder="+44 7000 000000" />
+              </label>
+            </div>
+            <p class="choice-note">Add at least one contact method. Phone updates may be SMS or WhatsApp depending on launch setup.</p>
+            <label class="consent" for="waitlist-consent">
+              <input id="waitlist-consent" name="consent" type="checkbox" required />
+              <span>I agree to be contacted about Pinglo launch updates and understand I can ask to be removed at any time.</span>
+            </label>
+            <div class="submit-row">
+              <button class="button button-primary" type="submit">Notify me</button>
+              <a class="button button-secondary" href="/history">Read the story</a>
+            </div>
+            <p class="form-status" id="waitlist-status" aria-live="polite"></p>
+          </form>
         </section>
       </div>
     </section>
@@ -526,5 +664,40 @@
       </nav>
     </div>
   </footer>
+  <script>
+    const form = document.getElementById("waitlist-form");
+    const status = document.getElementById("waitlist-status");
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const email = document.getElementById("waitlist-email").value.trim();
+      const phone = document.getElementById("waitlist-phone").value.trim();
+      const consent = document.getElementById("waitlist-consent").checked;
+
+      if (!email && !phone) {
+        status.textContent = "Add an email or phone number so we can contact you.";
+        return;
+      }
+
+      if (!consent) {
+        status.textContent = "Please confirm consent before joining the waitlist.";
+        return;
+      }
+
+      const body = [
+        "Please add me to the Pinglo launch waitlist.",
+        "",
+        `Email: ${email || "Not provided"}`,
+        `Phone: ${phone || "Not provided"}`,
+        "",
+        "Consent: I agree to be contacted about Pinglo launch updates."
+      ].join("\n");
+
+      const mailto = `mailto:hello@pingloapp.com?subject=${encodeURIComponent("Pinglo waitlist signup")}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+      status.textContent = "Your email app should open with a prepared waitlist message.";
+    });
+  </script>
 </body>
 </html>
