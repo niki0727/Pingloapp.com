@@ -1,11 +1,21 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "pingloappsite",
+  "main": "src/worker.js",
   "compatibility_date": "2026-04-30",
   "observability": {
     "enabled": true
   },
   "assets": {
-    "directory": "."
-  }
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "pinglo_waitlist",
+      "database_id": "639544a2-9c05-4847-80b7-3689c2f2ef23"
+    }
+  ]
 }
