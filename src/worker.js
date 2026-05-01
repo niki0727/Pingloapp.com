@@ -125,6 +125,15 @@ export default {
     const contentType = assetResponse.headers.get("content-type") || "";
     if (contentType.includes("text/html")) {
       return new HTMLRewriter()
+        .on("title", {
+          text(text) {
+            text.replace(
+              text.text
+                .replace("Pinglo — Lost & Found Made Simple", "Pinglo Lost & Found Made Simple")
+                .replace("Pinglo — History", "Pinglo History")
+            );
+          }
+        })
         .on("body", {
           element(element) {
             element.append(waitlistScript, { html: true });
